@@ -117,12 +117,7 @@ http.createServer(function (req, res) {
     console.log("HTTP Server running on port " + PORT);
 });
 
-const httpsServer = https.createServer({
-  key: fs.readFileSync('../../api.key'),
-  cert: fs.readFileSync('../../api.crt'),
-}, app);
 
-
-httpsServer.listen(443, () => {
+https.listen(443, () => {
     console.log('HTTPS Server running on port 443');
 });
