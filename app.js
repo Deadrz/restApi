@@ -107,6 +107,10 @@ app.use(function (req, res, next) {
 
 app.set('json spaces', 4);
 
+var options = {                                                                                   key: fs.readFileSync('./api.sun3haxor.my.id.key'),
+  cert: fs.readFileSync('./api.sun3haxor.my.id.crt')
+};
+
 http.createServer(function (req, res) {
     res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
     console.log("http request, will go to >> ");
@@ -118,6 +122,8 @@ http.createServer(function (req, res) {
 });
 
 
-https.listen(443, () => {
-    console.log('HTTPS Server running on port 443');
+https.createServer(options, app, () => {
+}).listen(443, (err) => {
+    if (err) throw err;
+    console.log("HTTPS Server running on port 443");
 });
